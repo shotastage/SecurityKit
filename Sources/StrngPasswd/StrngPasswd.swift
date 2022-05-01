@@ -1,10 +1,10 @@
-public struct StrngPasswd {
-    public private(set) var text = "Hello, World!"
 
-    public init() {
-    }
+public enum PasswdResult {
+    case weak
+    case medium
+    case strong
+    case unknown
 }
-
 
 public enum PasswdConditions {
     case containCapitalCaseAlphabet
@@ -12,4 +12,11 @@ public enum PasswdConditions {
     case containNumericCharactors
     case containSymbolCharactors
     case containNumericMinimum
+}
+
+open class StrngPasswd {
+    
+    func validate(conditions: Array<PasswdConditions>) -> PasswdResult {
+        return .medium
+    }
 }

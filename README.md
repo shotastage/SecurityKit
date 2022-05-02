@@ -1,3 +1,5 @@
 # StrngPasswd.swift
 
-A description of this package.
+>> Now under construction...
+
+Password strength checker for Swift.

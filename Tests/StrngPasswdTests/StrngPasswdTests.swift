@@ -6,6 +6,6 @@ final class StrngPasswdTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(StrngPasswd(passwd: "H839HsW@").evaluatePasswd, "H839HsW@")
+        XCTAssertEqual(String(StrngPasswd(passwd: "H839HsW@").evaluatePasswd), "H839HsW@")
     }
 }

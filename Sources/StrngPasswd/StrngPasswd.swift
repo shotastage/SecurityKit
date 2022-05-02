@@ -5,14 +5,14 @@
 //  Created by Shota Shimazu on 2022/05/01.
 //
 
-public enum PasswdResult {
+public enum PasswdResult: Equatable {
     case weak
     case medium
     case strong
     case unknown
 }
 
-public enum PasswdConditions {
+public enum PasswdConditions: Equatable {
     case containCapitalCaseAlphabet
     case containLowerCaseAlphabet
     case containNumericCharactors
@@ -22,10 +22,10 @@ public enum PasswdConditions {
 
 open class StrngPasswd {
     
-    let evaluatePasswd: String
+    let evaluatePasswd: Array<Character>
     
     init(passwd: String) {
-        evaluatePasswd = passwd
+        evaluatePasswd = Array(passwd)
     }
 
     func validate(conditions: Array<PasswdConditions>) -> PasswdResult {
@@ -40,11 +40,27 @@ extension StrngPasswd {
     }
 
     private var isContainCapital: Bool {
-        return true
+        var contain: Bool = false
+
+        self.evaluatePasswd.forEach { char in
+            if (char.isUppercase) {
+                contain = true
+            }
+        }
+
+        return contain
     }
     
     private var isContainLowercase: Bool {
-        return true
+        var contain: Bool = false
+
+        self.evaluatePasswd.forEach { char in
+            if (char.isLowercase) {
+                contain = true
+            }
+        }
+
+        return contain
     }
 
     private var isContainNumeric: Bool {

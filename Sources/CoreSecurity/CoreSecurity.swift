@@ -7,6 +7,7 @@
 
 import Foundation
 
+public struct CoreSecurity { }
 
 open class StrngPasswd {
 

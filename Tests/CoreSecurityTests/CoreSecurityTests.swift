@@ -1,7 +1,7 @@
 import XCTest
-@testable import StrngPasswd
+@testable import CoreSecurity
 
-final class StrngPasswdTests: XCTestCase {
+final class CoreSecurityTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
@@ -13,7 +13,7 @@ final class StrngPasswdTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        
+
         let superWeakPasswd1 = "@@Passwd123"
 
         let conditions = [
@@ -30,7 +30,7 @@ final class StrngPasswdTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        
+
         let superWeakPasswd1 = "qwerty"
 
         let conditions = [

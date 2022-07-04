@@ -8,6 +8,8 @@
 import Foundation
 
 
+public typealias PasswdStrength = Int
+
 public enum PasswdResult: Equatable {
     case weak
     case medium
@@ -15,21 +17,20 @@ public enum PasswdResult: Equatable {
     case unknown
 }
 
-typealias PasswdStrength = Int
-
-public enum PasswdConditions: Equatable {
+public enum CheckCondition: Equatable {
     case containLowercaseAlphabet
     case containUppercaseAlphabet
     case containNumericCharactors
     case containSymbolCharactors
-    case containNumericMinimum
+    case containNumericMinimum(_ min: Int)
 }
 
-public enum PasswdInvalidCondition: Equatable {
+public enum InvalidCondition: Equatable {
     case uppercaseNotContained
     case lowwercaseNotContained
     case numericCharactorNotContained
     case symbolCharactorsNotContained
+    case notEnoughCharacters
     case noInvalidation
 }
 
@@ -37,48 +38,52 @@ open class StrngPasswd {
 
     let evaluatePasswd: Array<Character>
 
-    init(passwd: String) {
+    public init(passwd: String) {
         evaluatePasswd = Array(passwd)
     }
 
-    func validate(conditions: Array<PasswdConditions>) -> PasswdConditions {
-        return .containUppercaseAlphabet
+    public func validate(conditions: Array<CheckCondition>) -> Array<InvalidCondition> {
+        var invalidConditions: Array<InvalidCondition> = []
+
+        for condition in conditions {
+            if evokeJudge(condition: condition) != .noInvalidation {
+                invalidConditions.append(evokeJudge(condition: condition))
+            }
+        }
+
+        return invalidConditions
     }
-    
-    func checkStrength() -> PasswdStrength {
+
+    private func checkStrength() -> PasswdStrength {
         return 1
     }
 }
 
 extension StrngPasswd {
 
-    fileprivate func conditionValidate(conditions: Array<PasswdConditions>) -> PasswdConditions {
-        let condition = conditions[0]
-
-        return .containUppercaseAlphabet
-    }
-
-    private func evokeJudge(condition: PasswdConditions) -> PasswdInvalidCondition {
+    private func evokeJudge(condition: CheckCondition) -> InvalidCondition {
 
         switch condition {
         case .containUppercaseAlphabet:
-            if isContainUppercase {
+            if !isContainUppercase {
                 return .uppercaseNotContained
             }
         case .containLowercaseAlphabet:
-            if isContainLowercase {
+            if !isContainLowercase {
                 return .lowwercaseNotContained
             }
         case .containNumericCharactors:
-            if isContainNumeric {
+            if !isContainNumeric {
                 return .numericCharactorNotContained
             }
         case .containSymbolCharactors:
-            if isContainSymblic {
+            if !isContainSymblic {
                 return .symbolCharactorsNotContained
             }
-        case .containNumericMinimum:
-            print()
+        case .containNumericMinimum(let minimum):
+            if !isNumericMinimum(minimum) {
+                return .notEnoughCharacters
+            }
         }
 
         return .noInvalidation

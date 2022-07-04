@@ -8,4 +8,25 @@ final class StrngPasswdTests: XCTestCase {
         // results.
         XCTAssertEqual(String(StrngPasswd(passwd: "H839HsW@").evaluatePasswd), "H839HsW@")
     }
+
+    func testWeakPasswd() throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        
+        let superWeakPasswd1 = "qwerty"
+
+        let conditions = [
+            CheckCondition.containNumericCharactors,
+            CheckCondition.containUppercaseAlphabet,
+            CheckCondition.containLowercaseAlphabet,
+            CheckCondition.containNumericMinimum(8)
+        ]
+
+        XCTAssertEqual(StrngPasswd(passwd: superWeakPasswd1).validate(conditions: conditions), [
+            InvalidCondition.numericCharactorNotContained,
+            InvalidCondition.uppercaseNotContained,
+            InvalidCondition.notEnoughCharacters
+        ])
+    }
 }

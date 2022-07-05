@@ -6,7 +6,7 @@ final class CoreSecurityTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(String(StrngPasswd(passwd: "H839HsW@").evaluatePasswd), "H839HsW@")
+        XCTAssertEqual(String(CSPasswordUtils(passwd: "H839HsW@").evaluatePasswd), "H839HsW@")
     }
 
     func testStrongPasswd() throws {
@@ -23,7 +23,7 @@ final class CoreSecurityTests: XCTestCase {
             CheckCondition.containNumericMinimum(8)
         ]
 
-        XCTAssertEqual(StrngPasswd(passwd: superWeakPasswd1).validate(conditions: conditions), [])
+        XCTAssertEqual(CSPasswordUtils(passwd: superWeakPasswd1).validate(conditions: conditions), [])
     }
 
     func testWeakPasswd() throws {
@@ -40,7 +40,7 @@ final class CoreSecurityTests: XCTestCase {
             CheckCondition.containNumericMinimum(8)
         ]
 
-        XCTAssertEqual(StrngPasswd(passwd: superWeakPasswd1).validate(conditions: conditions), [
+        XCTAssertEqual(CSPasswordUtils(passwd: superWeakPasswd1).validate(conditions: conditions), [
             InvalidCondition.numericCharactorNotContained,
             InvalidCondition.uppercaseNotContained,
             InvalidCondition.notEnoughCharacters

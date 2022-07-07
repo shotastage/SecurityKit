@@ -1,11 +1,12 @@
 //
-//  File.swift
+//  PasswdUtil.swift
 //  
 //
 //  Created by Shota Shimazu on 2022/07/05.
 //
 
 import Foundation
+
 
 open class CSPasswordUtils {
 
@@ -25,6 +26,12 @@ open class CSPasswordUtils {
         }
 
         return invalidConditions
+    }
+
+    public func generatePass() -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let symbols = "~!#$%&"
+        return ""
     }
 
     private func checkStrength() -> PasswdStrength {

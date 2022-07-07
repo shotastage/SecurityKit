@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  PasswdStrength.swift
 //  
 //
 //  Created by Shota Shimazu on 2022/07/04.
@@ -16,7 +16,6 @@ public enum PasswdResult: Equatable {
     case strong
     case unknown
 }
-
 
 extension CSPasswordUtils {
 

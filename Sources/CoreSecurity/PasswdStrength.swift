@@ -18,6 +18,6 @@ public enum PasswdResult: Equatable {
 }
 
 
-extension StrngPasswd {
+extension CSPasswordUtils {
 
 }

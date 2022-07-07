@@ -26,7 +26,7 @@ public enum InvalidCondition: Equatable {
 }
 
 
-extension StrngPasswd {
+extension CSPasswordUtils {
 
     func evokeJudge(condition: CheckCondition) -> InvalidCondition {
 

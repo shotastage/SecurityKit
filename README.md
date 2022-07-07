@@ -7,10 +7,10 @@ Password strength checker for Swift.
 ## Password condition checker
 
 
-To check password conditions, create `StrngPasswd` instance and call `validate` method with check conditions like following.
+To check password conditions, create `CSPasswordUtils` instance and call `validate` method with check conditions like following.
 
 ```swift
-StrngPasswd(passwd: "PasswdChar").validate(conditions: [_CHECK_CONDITIONS_])
+CSPasswordUtils(passwd: "PasswdChar").validate(conditions: [_CHECK_CONDITIONS_])
 ```
 
 
@@ -26,7 +26,7 @@ Check password string `@@Passwd123` with these conditions like below code.
 
 
 ```swift
-StrngPasswd(passwd: "@@Passwd123").validate(conditions: [
+CSPasswordUtils(passwd: "@@Passwd123").validate(conditions: [
   .containNumericCharactors,
   .containUppercaseAlphabet,
   .containLowercaseAlphabet,
@@ -46,7 +46,7 @@ Result: Array<InvalidCondition> -> [ ]
 And then, very weak password string `qwerty` with same conditions.
 
 ```swift
-StrngPasswd(passwd: "qwerty").validate(conditions: [
+CSPasswordUtils(passwd: "qwerty").validate(conditions: [
   .containNumericCharactors,
   .containUppercaseAlphabet,
   .containLowercaseAlphabet,

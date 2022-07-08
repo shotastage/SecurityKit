@@ -23,11 +23,9 @@ open class CSDataPipeline {
         out = ""
     }
 
+    @available(iOS 13.0, *)
     func encrypt() {
         let key = SymmetricKey(size: .bits256)
-        let sealedBox = try AES.GCM.seal(231, using: key)
-        
-        
-
+        let sealedBox = try! AES.GCM.seal(231, using: key)
     }
 }

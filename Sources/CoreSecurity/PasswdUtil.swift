@@ -28,11 +28,14 @@ open class CSPasswordUtils {
         return invalidConditions
     }
 
-    public func generatePass() -> String {
+    #if os(iOS)
+    public func generatePass(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let symbols = "~!#$%&"
-        return ""
+
+        return String((0..<length).map { _ in (letters + symbols).randomElement()! })
     }
+    #endif
 
     private func checkStrength() -> PasswdStrength {
         return 1

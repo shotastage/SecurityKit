@@ -1,5 +1,5 @@
 //
-//  CoreSecurity.swift
+//  CloudSecurity.swift
 //
 //
 //  Created by Shota Shimazu on 2022/05/01.
@@ -7,4 +7,4 @@
 
 import Foundation
 
-public struct CoreSecurity { }
+public struct CloudSecurity { }

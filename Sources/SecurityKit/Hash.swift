@@ -9,6 +9,12 @@ import Foundation
 import CommonCrypto
 
 
+open class HashAlg {
+    //
+}
+
+
+// MARK: Backup
 open class CSHash {
     public func sha256(data: Data) -> String {
             var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))

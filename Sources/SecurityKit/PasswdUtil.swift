@@ -16,16 +16,16 @@ open class CSPasswordUtils {
         evaluatePasswd = Array(passwd)
     }
 
-    public func validate(conditions: Array<CheckCondition>) -> Array<InvalidCondition> {
-        var invalidConditions: Array<InvalidCondition> = []
+    public func validate(policies: Array<PosswordPolicy>) -> Array<InvalidPolicy> {
+        var invalidPolicies: Array<InvalidPolicy> = []
 
-        for condition in conditions {
-            if evokeJudge(condition: condition) != .noInvalidation {
-                invalidConditions.append(evokeJudge(condition: condition))
+        for policy in policies {
+            if evokeJudge(condition: policy) != .noInvalidation {
+                invalidPolicies.append(evokeJudge(condition: policy))
             }
         }
 
-        return invalidConditions
+        return invalidPolicies
     }
 
     #if os(iOS)

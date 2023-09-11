@@ -8,7 +8,7 @@
 import Foundation
 
 
-public enum CheckCondition: Equatable {
+public enum PosswordPolicy: Equatable {
     case containLowercaseAlphabet
     case containUppercaseAlphabet
     case containNumericCharactors
@@ -16,7 +16,7 @@ public enum CheckCondition: Equatable {
     case containNumericMinimum(_ min: Int)
 }
 
-public enum InvalidCondition: Equatable {
+public enum InvalidPolicy: Equatable {
     case uppercaseNotContained
     case lowwercaseNotContained
     case numericCharactorNotContained
@@ -28,7 +28,7 @@ public enum InvalidCondition: Equatable {
 
 extension CSPasswordUtils {
 
-    func evokeJudge(condition: CheckCondition) -> InvalidCondition {
+    func evokeJudge(condition: PosswordPolicy) -> InvalidPolicy {
 
         switch condition {
         case .containUppercaseAlphabet:
@@ -107,7 +107,7 @@ extension CSPasswordUtils {
     }
 
     private func isNumericMinimum(_ min: Int) -> Bool {
-        
+
         if self.evaluatePasswd.count >= min {
             return true
         }

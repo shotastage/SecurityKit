@@ -20,3 +20,13 @@ public enum PasswdResult: Equatable {
 extension CSPasswordUtils {
 
 }
+
+open class Zxcvbn {
+    let matcher: String
+    let scorer: String
+
+    init(matcher: String, scorer: String) {
+        self.matcher = matcher
+        self.scorer = scorer
+    }
+}

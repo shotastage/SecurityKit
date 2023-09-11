@@ -1,4 +1,4 @@
-# CloudSecurity
+# SecurityKit
 
 >> Now under construction...
 

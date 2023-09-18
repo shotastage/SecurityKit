@@ -2,7 +2,7 @@
 
 >> Now under construction...
 
-Password strength checker for Swift.
+Security utilities pack for both iOS and server-side.
 
 ## Password condition checker
 

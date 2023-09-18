@@ -10,7 +10,10 @@ import CommonCrypto
 
 
 open class HashAlg {
-    //
+
+    func generate() -> String {
+        return ""
+    }
 }
 
 
@@ -23,7 +26,7 @@ open class CSHash {
                 guard let ptr = rawPtr.baseAddress?.assumingMemoryBound(to: UInt8.self) else { return }
                 CC_SHA256(ptr, CC_LONG(data.count), &digest)
             }
-     
+
             return digest.map { String(format: "%02x", $0) }.joined(separator: "")
         }
 

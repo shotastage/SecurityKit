@@ -9,6 +9,13 @@ import Foundation
 import CommonCrypto
 
 
+public protocol HashAlgorithm {
+    /// Incorporates data into the hash calculation
+    func update(with data: Data)
+    /// Finalizes the hash calculation and returns the final digest
+    func final() -> Data
+}
+
 open class HashAlg {
 
     func generate() -> String {

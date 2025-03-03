@@ -123,7 +123,7 @@ extension Data {
         var digest = Data()
         for value in [a, b, c, d] {
             var littleEndian = value.littleEndian
-            let bytes = withUnsafeBytes(of: &littleEndian) { Data($0) }
+            let bytes = Swift.withUnsafeBytes(of: &littleEndian) { Data($0) }
             digest.append(bytes)
         }
         return digest

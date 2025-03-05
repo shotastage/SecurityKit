@@ -1,5 +1,8 @@
 # SecurityKit
 
+![Swift Version](https://img.shields.io/badge/Swift_6-Compatible-green)
+![GitHub License](https://img.shields.io/github/license/shotastage/SecurityKit?style=flat)
+
 >> Now under construction...
 
 Security utilities pack for both iOS and server-side.

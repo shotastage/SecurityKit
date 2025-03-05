@@ -15,6 +15,13 @@ open class MD5: HashAlg {
 extension Data {
     /// Returns MD5 hash as Data type (implementing the MD5 algorithm internally)
     func md5() -> Data {
+        #if DEBUG
+        print("⚠️ WARNING: MD5 is not secure for cryptographic purposes.")
+        print("   It's vulnerable to collision attacks and should only be used")
+        print("   for non-security purposes like checksums or file verification.")
+        #endif
+
+
         // 1. Padding process
         // Add a "1" bit (0x80) to the original byte sequence,
         // fill with zeros until the block size (64 bytes) minus 8 bytes (56th byte),

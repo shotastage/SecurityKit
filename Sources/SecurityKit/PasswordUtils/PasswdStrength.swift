@@ -16,9 +16,7 @@ public enum PasswdResult: Equatable {
     case unknown
 }
 
-extension CSPasswordUtils {
-
-}
+extension CSPasswordUtils {}
 
 open class Zxcvbn {
     let matcher: String

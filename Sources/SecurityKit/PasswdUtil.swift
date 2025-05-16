@@ -1,23 +1,21 @@
 //
 //  PasswdUtil.swift
-//  
+//
 //
 //  Created by Shota Shimazu on 2022/07/05.
 //
 
 import Foundation
 
-
 open class CSPasswordUtils {
-
-    let evaluatePasswd: Array<Character>
+    let evaluatePasswd: [Character]
 
     public init(passwd: String) {
         evaluatePasswd = Array(passwd)
     }
 
-    public func validate(policies: Array<PosswordPolicy>) -> Array<InvalidPolicy> {
-        var invalidPolicies: Array<InvalidPolicy> = []
+    public func validate(policies: [PosswordPolicy]) -> [InvalidPolicy] {
+        var invalidPolicies: [InvalidPolicy] = []
 
         for policy in policies {
             if evokeJudge(condition: policy) != .noInvalidation {
@@ -29,12 +27,12 @@ open class CSPasswordUtils {
     }
 
     #if os(iOS)
-    public func generatePass(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let symbols = "~!#$%&"
+        public func generatePass(length: Int) -> String {
+            let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            let symbols = "~!#$%&"
 
-        return String((0..<length).map { _ in (letters + symbols).randomElement()! })
-    }
+            return String((0 ..< length).map { _ in (letters + symbols).randomElement()! })
+        }
     #endif
 
     private func checkStrength() -> PasswdStrength {

@@ -1,12 +1,11 @@
 //
 //  PasswdConditions.swift
-//  
+//
 //
 //  Created by Shota Shimazu on 2022/07/04.
 //
 
 import Foundation
-
 
 public enum PosswordPolicy: Equatable {
     case containLowercaseAlphabet
@@ -25,11 +24,8 @@ public enum InvalidPolicy: Equatable {
     case noInvalidation
 }
 
-
 extension CSPasswordUtils {
-
     func evokeJudge(condition: PosswordPolicy) -> InvalidPolicy {
-
         switch condition {
         case .containUppercaseAlphabet:
             if !isContainUppercase {
@@ -47,7 +43,7 @@ extension CSPasswordUtils {
             if !isContainSymblic {
                 return .symbolCharactorsNotContained
             }
-        case .containNumericMinimum(let minimum):
+        case let .containNumericMinimum(minimum):
             if !isNumericMinimum(minimum) {
                 return .notEnoughCharacters
             }
@@ -57,10 +53,10 @@ extension CSPasswordUtils {
     }
 
     private var isContainUppercase: Bool {
-        var contain: Bool = false
+        var contain = false
 
-        self.evaluatePasswd.forEach { char in
-            if (char.isUppercase) {
+        for char in evaluatePasswd {
+            if char.isUppercase {
                 contain = true
             }
         }
@@ -69,10 +65,10 @@ extension CSPasswordUtils {
     }
 
     private var isContainLowercase: Bool {
-        var contain: Bool = false
+        var contain = false
 
-        self.evaluatePasswd.forEach { char in
-            if (char.isLowercase) {
+        for char in evaluatePasswd {
+            if char.isLowercase {
                 contain = true
             }
         }
@@ -81,10 +77,10 @@ extension CSPasswordUtils {
     }
 
     private var isContainNumeric: Bool {
-        var contain: Bool = false
+        var contain = false
 
-        self.evaluatePasswd.forEach { char in
-            if (Double(String(describing: char)) != nil) {
+        for char in evaluatePasswd {
+            if Double(String(describing: char)) != nil {
                 contain = true
             }
         }
@@ -95,7 +91,7 @@ extension CSPasswordUtils {
     private var isContainSymblic: Bool {
         do {
             let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: .caseInsensitive)
-            if let _ = regex.firstMatch(in: String(self.evaluatePasswd), options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, self.evaluatePasswd.count)) {
+            if let _ = regex.firstMatch(in: String(evaluatePasswd), options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, evaluatePasswd.count)) {
                 return true
             }
 
@@ -107,8 +103,7 @@ extension CSPasswordUtils {
     }
 
     private func isNumericMinimum(_ min: Int) -> Bool {
-
-        if self.evaluatePasswd.count >= min {
+        if evaluatePasswd.count >= min {
             return true
         }
 

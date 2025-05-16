@@ -8,19 +8,17 @@
 import Foundation
 
 open class MD5: HashAlg {
-    private let initialValues: Array<UInt32> = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476]
+    private let initialValues: [UInt32] = [0x6745_2301, 0xEFCD_AB89, 0x98BA_DCFE, 0x1032_5476]
 }
-
 
 extension Data {
     /// Returns MD5 hash as Data type (implementing the MD5 algorithm internally)
     func md5() -> Data {
         #if DEBUG
-        print("⚠️ WARNING: MD5 is not secure for cryptographic purposes.")
-        print("   It's vulnerable to collision attacks and should only be used")
-        print("   for non-security purposes like checksums or file verification.")
+            print("⚠️ WARNING: MD5 is not secure for cryptographic purposes.")
+            print("   It's vulnerable to collision attacks and should only be used")
+            print("   for non-security purposes like checksums or file verification.")
         #endif
-
 
         // 1. Padding process
         // Add a "1" bit (0x80) to the original byte sequence,
@@ -29,24 +27,24 @@ extension Data {
         var message = [UInt8](self)
         let originalLength = message.count
         message.append(0x80) // 1000 0000
-        
+
         // In a 64-byte block, the last 8 bytes are for message length, so pad with zeros until 56 bytes
         while (message.count % 64) != 56 {
             message.append(0)
         }
-        
+
         // Append the original length (in bits) as a 64-bit little-endian value
         let bitLength = UInt64(originalLength) * 8
-        for i in 0..<8 {
-            message.append(UInt8((bitLength >> (8 * i)) & 0xff))
+        for i in 0 ..< 8 {
+            message.append(UInt8((bitLength >> (8 * i)) & 0xFF))
         }
-        
+
         // 2. Initial values (four 32-bit integers defined in MD5 specification)
-        var a: UInt32 = 0x67452301
-        var b: UInt32 = 0xefcdab89
-        var c: UInt32 = 0x98badcfe
-        var d: UInt32 = 0x10325476
-        
+        var a: UInt32 = 0x6745_2301
+        var b: UInt32 = 0xEFCD_AB89
+        var c: UInt32 = 0x98BA_DCFE
+        var d: UInt32 = 0x1032_5476
+
         // 3. Shift amounts (rotation bits used in each round)
         let s: [UInt32] = [
             // Round 1 (16 times)
@@ -60,39 +58,39 @@ extension Data {
             4, 11, 16, 23, 4, 11, 16, 23,
             // Round 4 (16 times)
             6, 10, 15, 21, 6, 10, 15, 21,
-            6, 10, 15, 21, 6, 10, 15, 21
+            6, 10, 15, 21, 6, 10, 15, 21,
         ]
-        
+
         // 4. Constants T[i] = floor(2^32 * abs(sin(i+1))) (i = 0...63)
         var T = [UInt32](repeating: 0, count: 64)
-        for i in 0..<64 {
-            T[i] = UInt32(floor(4294967296 * abs(sin(Double(i + 1)))))
+        for i in 0 ..< 64 {
+            T[i] = UInt32(floor(4_294_967_296 * abs(sin(Double(i + 1)))))
         }
-        
+
         // 5. Process each 512-bit (64-byte) block
         let blockCount = message.count / 64
-        for i in 0..<blockCount {
+        for i in 0 ..< blockCount {
             let blockStart = i * 64
             // Split into 16 32-bit words (little-endian)
             var M = [UInt32](repeating: 0, count: 16)
-            for j in 0..<16 {
+            for j in 0 ..< 16 {
                 let index = blockStart + j * 4
                 M[j] = UInt32(message[index]) |
-                       (UInt32(message[index + 1]) << 8) |
-                       (UInt32(message[index + 2]) << 16) |
-                       (UInt32(message[index + 3]) << 24)
+                    (UInt32(message[index + 1]) << 8) |
+                    (UInt32(message[index + 2]) << 16) |
+                    (UInt32(message[index + 3]) << 24)
             }
-            
+
             // Copy current state to temporary variables
             var A = a
             var B = b
             var C = c
             var D = d
-            
+
             // 6. Main loop: 64 operations
-            for k in 0..<64 {
+            for k in 0 ..< 64 {
                 var F: UInt32 = 0
-                var g: Int = 0
+                var g = 0
                 if k < 16 {
                     // Round 1
                     F = (B & C) | ((~B) & D)
@@ -107,10 +105,10 @@ extension Data {
                     g = (3 * k + 5) % 16
                 } else {
                     // Round 4
-                    F = C ^ (B | (~D))
+                    F = C ^ (B | ~D)
                     g = (7 * k) % 16
                 }
-                
+
                 // MD5 update process (compliant with RFC 1321)
                 let temp = D
                 D = C
@@ -118,14 +116,14 @@ extension Data {
                 B = B &+ rotateLeft(A &+ F &+ M[g] &+ T[k], by: s[k])
                 A = temp
             }
-            
+
             // Add to each variable after block processing (modular addition)
             a = a &+ A
             b = b &+ B
             c = c &+ C
             d = d &+ D
         }
-        
+
         // 7. Output result: concatenate a, b, c, d in little-endian to create 16-byte Data
         var digest = Data()
         for value in [a, b, c, d] {

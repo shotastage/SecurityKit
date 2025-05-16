@@ -7,4 +7,4 @@
 
 import Foundation
 
-public struct CloudSecurity { }
+public struct CloudSecurity {}

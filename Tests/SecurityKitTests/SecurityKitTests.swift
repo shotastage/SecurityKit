@@ -1,5 +1,5 @@
-import XCTest
 @testable import SecurityKit
+import XCTest
 
 final class SecurityKitTests: XCTestCase {
     func testExample() throws {
@@ -20,7 +20,7 @@ final class SecurityKitTests: XCTestCase {
             CheckCondition.containNumericCharactors,
             CheckCondition.containUppercaseAlphabet,
             CheckCondition.containLowercaseAlphabet,
-            CheckCondition.containNumericMinimum(8)
+            CheckCondition.containNumericMinimum(8),
         ]
 
         XCTAssertEqual(CSPasswordUtils(passwd: superWeakPasswd1).validate(conditions: conditions), [])
@@ -37,13 +37,13 @@ final class SecurityKitTests: XCTestCase {
             CheckCondition.containNumericCharactors,
             CheckCondition.containUppercaseAlphabet,
             CheckCondition.containLowercaseAlphabet,
-            CheckCondition.containNumericMinimum(8)
+            CheckCondition.containNumericMinimum(8),
         ]
 
         XCTAssertEqual(CSPasswordUtils(passwd: superWeakPasswd1).validate(conditions: conditions), [
             InvalidCondition.numericCharactorNotContained,
             InvalidCondition.uppercaseNotContained,
-            InvalidCondition.notEnoughCharacters
+            InvalidCondition.notEnoughCharacters,
         ])
     }
 }
